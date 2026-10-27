@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheResult="false">
+    <testsuites>
+        <testsuite name="Skeleton">
+            <!--
+                DocsTest et CodeHighlighterTest vérifient le contenu de la documentation
+                du monorepo (README.md racine + docs/*.md) : ils ne peuvent pas s'exécuter
+                dans ce dépôt autonome. La suite complète tourne dans la CI de
+                winterphp/winter.
+            -->
+            <directory>tests</directory>
+            <exclude>tests/Feature/DocsTest.php</exclude>
+            <exclude>tests/Unit/CodeHighlighterTest.php</exclude>
+        </testsuite>
+    </testsuites>
+</phpunit>

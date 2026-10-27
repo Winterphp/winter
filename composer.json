@@ -1,0 +1,55 @@
+{
+    "name": "winterphp/monorepo",
+    "description": "Winter — framework PHP 8 inspiré de Spring Boot, monorepo",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/framework",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "winterphp/framework": "0.1.99"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "packages/skeleton",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "winterphp/skeleton": "0.1.99"
+                }
+            }
+        }
+    ],
+    "require": {
+        "winterphp/framework": "^0.1",
+        "winterphp/skeleton": "^0.1"
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Winter\\Tests\\": "packages/framework/tests/",
+            "Winter\\Tests\\Fixtures\\App\\": "packages/framework/tests/Fixtures/App/src/",
+            "App\\Tests\\": "packages/skeleton/tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "test:framework": "pest --testsuite=Framework",
+        "test:skeleton": "pest --testsuite=Skeleton",
+        "dump": "composer dump-autoload -o --classmap-authoritative"
+    }
+}

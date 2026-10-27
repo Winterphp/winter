@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>{{ status }} — {{ exception_class ?? 'Erreur' }}</title>
+    <style>
+        body { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #1b1e24; color: #d7dae0; margin: 0; padding: 2rem; }
+        h1 { color: #ff6b6b; font-size: 1.4rem; }
+        .badge { display: inline-block; background: #2c313a; padding: .2rem .6rem; border-radius: 4px; color: #9ba3b4; }
+        pre { background: #12151a; border-left: 3px solid #ff6b6b; padding: 1rem; overflow: auto; }
+        .trace { color: #9ba3b4; font-size: .85rem; white-space: pre-wrap; }
+        a { color: #66d9ef; }
+    </style>
+</head>
+<body>
+    <p class="badge">{{ status }} · {{ request.method }} {{ request.pathInfo }}</p>
+    <h1>{{ message }}</h1>
+    {% if exception %}
+        <p>{{ exception_class }} in {{ exception.file }}:{{ exception.line }}</p>
+        <pre>{{ exception.traceAsString }}</pre>
+    {% endif %}
+    <p><a href="/">Retour à l'accueil</a></p>
+</body>
+</html>

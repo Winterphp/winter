@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#070b14">
+    <meta name="description" content="Winter PHP — framework PHP 8 inspiré de Spring Boot : un seul dossier src/, injection par attributs, container compilé.">
+    <title>{% block title %}Winter PHP — framework PHP 8 inspiré de Spring Boot{% endblock %}</title>
+    <link rel="stylesheet" href="/assets/winter.css">
+</head>
+<body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    {% set currentUser = current_user() %}
+
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="brand" href="{{ path('home.index') }}" aria-label="Winter PHP, accueil">
+                <span class="brand-mark" aria-hidden="true">❄</span>
+                <span class="brand-name">Winter</span>
+                <span class="brand-suffix">PHP</span>
+            </a>
+
+            <nav class="site-nav" aria-label="Navigation principale">
+                <a class="nav-link" href="{{ path('docs.index') }}">Documentation</a>
+
+                {% if currentUser %}
+                    <span class="nav-user" title="{{ currentUser.identifier }}">{{ currentUser.identifier }}</span>
+                    <form class="inline-form" method="post" action="/logout">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-ghost btn-small" type="submit">Déconnexion</button>
+                    </form>
+                {% else %}
+                    <a class="btn btn-ghost btn-small" href="/login">Connexion</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main id="contenu">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell footer-inner">
+            <p><strong>Winter</strong> <span class="muted">PHP — framework PHP 8 inspiré de Spring Boot</span></p>
+            <p class="muted">PHP 8.3+ · MIT · pensé pour PHP-FPM</p>
+        </div>
+    </footer>
+</body>
+</html>

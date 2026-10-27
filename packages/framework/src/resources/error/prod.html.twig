@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>{{ status }} — Erreur</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f8f9fb; color: #24292f; display: grid; place-items: center; height: 100vh; margin: 0; }
+        .card { text-align: center; }
+        h1 { font-size: 3rem; margin: 0; color: #d0d7de; }
+        p { color: #57606a; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>{{ status }}</h1>
+        <p>{{ message }}</p>
+        <p><a href="/">Retour à l'accueil</a></p>
+    </div>
+</body>
+</html>

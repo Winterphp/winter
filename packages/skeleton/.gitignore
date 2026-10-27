@@ -1,0 +1,18 @@
+/vendor/
+/composer.lock
+
+# Secrets locaux
+/.env
+/.env.*
+!/.env.example
+
+# Exécution
+/var/cache/*
+!/var/cache/.gitkeep
+/var/log/*
+!/var/log/.gitkeep
+*.sqlite
+
+# Tests
+/.phpunit.cache/
+/.phpunit.result.cache

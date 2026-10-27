@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="hero">
+        <div class="shell">
+            <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Framework PHP 8 · inspiré de Spring Boot</p>
+
+            <h1 class="hero-title">Winter</h1>
+
+            <p class="hero-tagline">Un seul <code>src/</code>. Zéro convention imposée.</p>
+
+            <p class="hero-lead">
+                Les stéréotypes, l'injection par type et le routing déclaratif de Spring Boot,
+                appliqués à PHP — sans structure de dossiers imposée et sans réflexion à chaque requête.
+            </p>
+
+            <div class="cta-row">
+                <a class="btn btn-primary" href="#demarrage">Démarrer</a>
+                <a class="btn btn-ghost" href="/login">Se connecter</a>
+            </div>
+
+            <p class="hero-meta">
+                <span>PHP 8.3+</span>
+                <span>container compilé</span>
+                <span>Twig &amp; Doctrine</span>
+                <span>zéro JavaScript</span>
+            </p>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="titre-atouts">
+        <div class="shell">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">Philosophie</p>
+                    <h2 class="section-title" id="titre-atouts">La liberté de Spring, la simplicité de PHP.</h2>
+                </div>
+                <p class="section-note">Trois convictions qui tiennent l'architecture : peu de conventions, aucune magie à l'exécution.</p>
+            </div>
+
+            <div class="feature-grid">
+                <article class="card">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 7.5h6.5V4h3v3.5H20v9h-6.5V20h-3v-3.5H4z"/></svg>
+                    </span>
+                    <h3>Un seul dossier</h3>
+                    <p>Tout vit dans <code>src/</code>. Contrôleurs, services, entités, DTO : vous choisissez l'organisation, les attributs font le lien.</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M5.6 5.6l2.8 2.8m7.2 7.2 2.8 2.8m0-12.8-2.8 2.8m-7.2 7.2-2.8 2.8"/></svg>
+                    </span>
+                    <h3>Injection compilée</h3>
+                    <p>Le container est scanné une fois puis généré en PHP. En production, aucune lecture de réflexion par requête.</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M13 2 4.5 13H11l-1 9 8.5-11H12z"/></svg>
+                    </span>
+                    <h3>Pensé PHP-FPM</h3>
+                    <p>Stateless par conception, cache construit au déploiement, aucun serveur à maintenir en parallèle.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" aria-labelledby="titre-code">
+        <div class="shell code-layout">
+            <div class="code-copy">
+                <p class="section-kicker">En pratique</p>
+                <h2 class="section-title" id="titre-code">Un contrôleur, c'est tout.</h2>
+                <p>Pas de fichier de routes à tenir à jour, pas de provider à déclarer. La classe est découverte, injectée et routée par ses attributs.</p>
+                <p class="muted">Une interface n'a qu'une implémentation ? Elle est liée automatiquement. Plusieurs ? <code>#[Primary]</code> ou <code>#[Qualifier]</code> tranchent.</p>
+                <a class="btn btn-ghost" href="#demarrage">Voir les commandes</a>
+            </div>
+
+            <div class="code-window" role="group" aria-label="Exemple de contrôleur Winter">
+                <div class="code-bar">
+                    <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    <span class="filename">src/Controller/ArticleController.php</span>
+                </div>
+<pre><code><span class="tok-attr">#[Controller]</span>
+<span class="tok-attr">#[Route</span>(<span class="tok-str">'/articles'</span><span class="tok-attr">)]</span>
+<span class="tok-key">final class</span> <span class="tok-type">ArticleController</span>
+{
+    <span class="tok-key">public function</span> <span class="tok-fn">__construct</span>(
+        <span class="tok-key">private readonly</span> <span class="tok-type">ArticleService</span> <span class="tok-dim">$articles</span>,
+    ) {}
+
+    <span class="tok-attr">#[GetMapping</span>(<span class="tok-str">'/{id}'</span><span class="tok-attr">)]</span>
+    <span class="tok-key">public function</span> <span class="tok-fn">show</span>(<span class="tok-key">int</span> <span class="tok-dim">$id</span>): <span class="tok-key">array</span>
+    {
+        <span class="tok-key">return</span> [<span class="tok-str">'article'</span> =&gt; <span class="tok-dim">$this</span>-&gt;articles-&gt;<span class="tok-fn">find</span>(<span class="tok-dim">$id</span>)];
+    }
+}</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="demarrage" aria-labelledby="titre-demarrage">
+        <div class="shell">
+            <div class="section-head">
+                <div>
+                    <p class="section-kicker">Démarrage</p>
+                    <h2 class="section-title" id="titre-demarrage">Trois commandes, et il neige.</h2>
+                </div>
+                <p class="section-note">Prérequis : PHP 8.3+ et Composer. Aucune extension exotique, aucun build front.</p>
+            </div>
+
+            <ol class="steps">
+                <li class="step">
+                    <h3>Installer</h3>
+                    <code>composer install</code>
+                    <p>Dépendances du framework et du squelette.</p>
+                </li>
+                <li class="step">
+                    <h3>Compiler</h3>
+                    <code>php bin/console cache:compile</code>
+                    <p>Scan de <code>src/</code>, container, routes et Twig.</p>
+                </li>
+                <li class="step">
+                    <h3>Lancer</h3>
+                    <code>php -S 127.0.0.1:8000 -t public</code>
+                    <p>Puis ouvrir <code>http://127.0.0.1:8000</code>.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+{% endblock %}

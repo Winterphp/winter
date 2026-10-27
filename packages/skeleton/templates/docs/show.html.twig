@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page.title }} — Documentation Winter{% endblock %}
+
+{% block body %}
+    <section class="doc-hero">
+        <div class="shell">
+            <p class="section-kicker">Documentation</p>
+            <h1 class="doc-title">{{ page.title }}</h1>
+            <p class="doc-lead">{{ page.summary }}</p>
+            <p class="doc-meta">
+                <span>{{ page.source }}</span>
+                <span>PHP 8.3+</span>
+                <span>{{ pages|length }} pages</span>
+            </p>
+        </div>
+    </section>
+
+    <div class="shell doc-layout">
+        <aside class="doc-sidebar">
+            <nav class="doc-nav" aria-label="Pages de la documentation">
+                <p class="doc-nav-title">Sommaire</p>
+                <ul>
+                    {% for entry in pages %}
+                        <li>
+                            <a href="{{ path('docs.show', { slug: entry.slug }) }}"
+                               {%- if entry.slug == page.slug %} class="is-active" aria-current="page"{% endif %}>{{ entry.label }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {% if page.toc %}
+                <nav class="doc-toc" aria-label="Sur cette page">
+                    <p class="doc-nav-title">Sur cette page</p>
+                    <ul>
+                        {% for heading in page.toc %}
+                            <li class="toc-level-{{ heading.level }}">
+                                <a href="#{{ heading.id }}">{{ heading.title|raw }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </aside>
+
+        <article class="doc-body">
+            {{ page.html|raw }}
+
+            {% if previous or next %}
+                <nav class="doc-pager" aria-label="Navigation entre les pages">
+                    {% if previous %}
+                        <a class="doc-pager-link" href="{{ path('docs.show', { slug: previous.slug }) }}">
+                            <span>Précédent</span>
+                            <strong>{{ previous.label }}</strong>
+                        </a>
+                    {% endif %}
+
+                    {% if next %}
+                        <a class="doc-pager-link doc-pager-next" href="{{ path('docs.show', { slug: next.slug }) }}">
+                            <span>Suivant</span>
+                            <strong>{{ next.label }}</strong>
+                        </a>
+                    {% endif %}
+                </nav>
+            {% endif %}
+        </article>
+    </div>
+{% endblock %}

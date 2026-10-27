@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion — Winter PHP{% endblock %}
+
+{% block body %}
+    <section class="auth">
+        <div class="auth-card">
+            <p class="section-kicker">Session</p>
+            <h1>Connexion</h1>
+            <p>Accédez à votre espace Winter.</p>
+
+            {% if error %}
+                <p class="alert" role="alert">{{ error }}</p>
+            {% endif %}
+
+            <form method="post" action="/login">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <label class="field">
+                    <span>Adresse e-mail</span>
+                    <input type="email" name="email" value="{{ email }}" autocomplete="username" placeholder="vous@exemple.com" required>
+                </label>
+
+                <label class="field">
+                    <span>Mot de passe</span>
+                    <input type="password" name="password" autocomplete="current-password" placeholder="••••••••" required>
+                </label>
+
+                <button class="btn btn-primary" type="submit">Se connecter</button>
+            </form>
+
+            <p class="auth-hint">Protégé par un jeton CSRF et une session httpOnly.</p>
+        </div>
+    </section>
+{% endblock %}
